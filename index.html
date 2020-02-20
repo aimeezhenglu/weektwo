@@ -15,60 +15,7 @@
 </head>
 
 <body>
-    <a-scene>
-        <a-assets>
-          
-          <!-- teleport stuff -->
-          <a-mixin id="teleport"
-            teleport-controls="type: parabolic; button: trigger; cameraRig: #cameraRig; defaultPlaneSize: 1000; ">
-          </a-mixin>
-          
-          <!-- import model here -->
-          <a-asset-item id="p1" src="models/astron/scene.gltf" position="0 -1 0" >
-          </a-asset-item>
-
-          <a-asset-item id="p2" src="models/astron/scene.gltf" position="0 -1 0" >
-          </a-asset-item>
-
-          <a-asset-item id="p3" src="models/astron/scene.gltf" position="0 -1 0" >
-          </a-asset-item> 
-
-          <!-- import sound with the audio tag -->
-          <audio id="swell" crossorigin="anonymous" preload="auto" src="snd/footsteps_high.wav"></audio>
-        
-        </a-assets>
-    
-          <!-- add environment -->
-          <a-entity environment="preset: checkerboard"></a-entity>
-    
-          <!-- add animation -->
-          <a-sphere scale=".5 .5 .5" position="0 5 -.5" radius="5" color="#ACABB3" animation__rotation="property: rotation; dir: alternate; dur: 10000;
-                              easing: easeInSine; loop: true; to: 0 360 0" animation__position="property: position; dir: alternate; dur: 10000;
-                              easing: easeInSine; loop: true; from: 0 5 0; to: 0 5 -40" animation__segmentw="property: segments-width; dir: alternate; dur: 1000;
-                              easing: easeInSine; loop: true; from: 2; to: 36" animation__segmenth="property: segments-height; dir: alternate; dur: 1000;
-                              easing: easeInSine; loop: true; from: 2; to: 18">
-          </a-sphere>
-          
-          <a-gltf-model src="#p1" scale="0.862 0.862 1.019" position="3.10516 0.002 -13.78016" animation-mixer="">
-          </a-gltf-model>
-
-          <a-gltf-model src="#p2" scale="0.862 0.862 1.019" position="6.17988 0.002 -9.38978" animation-mixer="">
-          </a-gltf-model>
-
-          <a-gltf-model src="#p3" scale="0.862 0.862 1.019" position="-6.68561 0.002 -13.78016" animation-mixer="">
-          </a-gltf-model>
-
-          <a-sound src="#swell" autoplay="true" loop="true" volume="50"></a-sound>
-    
-          <!-- teleport rig -->
-          <a-entity id="cameraRig" position="0 0.1 0">
-            <a-entity camera wasd-controls look-controls></a-entity>
-            <a-entity id="rightHand" mixin="teleport" laser-controls="hand: right" windows-motion-controls="hand: right"
-              oculus-go-controls="hand: right" oculus-touch-controls="hand: right">
-          </a-entity>
-    
-    
-    </a-scene>
+<a href="1.html">Start Experience</a>
 </body>
 
 </html>
