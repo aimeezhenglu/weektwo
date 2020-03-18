@@ -1,60 +1,78 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Basic Interactions - A-Frame</title>
-    <meta name="description" content="Interactions - A-Frame">
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+  <meta charset="utf-8">
+  <title>HEALER</title>
+  <meta name="description" content="VR game">
+  <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+  <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
 </head>
 
+
 <body>
-    <a-scene>
-        <a-assets>
-            <img id="gndTexture" src="assets/img/grid.jpg">
-        </a-assets>
+  <a-scene>
 
-        <!-- override the default camera and add a child entity with cursor inside -->
-        <a-entity camera look-controls wasd-controls>
-            <a-entity cursor
-                      position="0 0 -1"
-                      geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                      material="color: black; shader: flat">
-            </a-entity>
-          </a-entity>
+    <a-assets>
+      <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: #cameraRig; defaultPlaneSize: 1000;"></a-mixin>
+      <a-asset-item id="si-obj" src="assets/models/si/character1.obj"></a-asset-item>
+      <a-asset-item id="si-mtl" src="assets/models/si/character1.mtl"></a-asset-item>
+      <a-asset-item id="si-obj2" src="assets/models/si/character2.obj"></a-asset-item>
+      <a-asset-item id="si-mtl2" src="assets/models/si/character2.mtl"></a-asset-item>
+      <a-asset-item id="si-obj3" src="assets/models/si/character3.obj"></a-asset-item>
+      <a-asset-item id="si-mtl3" src="assets/models/si/character3.mtl"></a-asset-item>
+    </a-assets>
 
-        <a-box position="-3 1 -5" rotation="0 90 30" scale="" color="#F44336" 
-            event-set__mouseenter="_event: mouseenter; material.color: blue"
-            event-set__mouseleave="_event: mouseleave; material.color: #F44336"
-            sound="src: assets/sound/sound9.mp3; on: mouseenter"></a-box>
-        </a-box>
-        <a-box position=" -1 2 -5 " rotation="0 45 45 " scale="0.75 0.75 0.75 " color="#2196F3" 
-            event-set__mouseenter="_event: mouseenter; material.color: red"
-            event-set__mouseleave="_event: mouseleave; material.color: #2196F3"
-            sound="src: assets/sound/sound20.mp3; on: mouseenter">
-        </a-box>
-        <a-box position="2 2 -4 " rotation="0 45 30 " scale="0.75 0.75 0.75 " color="#009688" 
-            event-set__mouseenter="_event: mouseenter; material.color: yellow"
-            event-set__mouseleave="_event: mouseleave; material.color: #009688"
-            sound="src: assets/sound/sound24.mp3; on: mouseenter">
-        </a-box>
-        <a-box position="1 1 -5 " rotation="0 70 30 " scale="0.9 0.9 0.9 " color="#E91E63" 
-            event-set__mouseenter="_event: mouseenter; material.color: purple"
-            event-set__mouseleave="_event: mouseleave; material.color: #E91E63"
-            sound="src: assets/sound/sound27.mp3; on: mouseenter">
-        </a-box>
 
-        <!-- Uncomment to add laser controls for VR controllers -->
-        <!-- <a-entity laser-controls="hand: left "></a-entity>
-        <a-entity laser-controls="hand: right "></a-entity> -->
+    <a-entity environment="preset: tron"></a-entity>
 
-        <a-sky id="bg " color="#fff "></a-sky>
+              
+              <!-- Camera with gaze -->
+              <a-entity camera look-controls wasd-controls="acceleration:100" position="0 1 -1">
+                <a-entity cursor="fuse: true; fuseTimeout: 500"
+                          position="0 0 -1"
+                          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                          material="color: black; shader: flat">
+                </a-entity>
+              </a-entity>
 
-        <a-plane src="#gndTexture " rotation="-90 0 0 " width="50 " height="50 "></a-plane>
+    
+    <a-entity id="ttt" obj-model="obj: #si-obj; mtl: #si-mtl" position="-4 1 -5" scale=".25 .25 .25"
+      animation__rot="property: position; from:-4 4 -5; to: -4 1 -5; loop: true; dur: 3000; dir: alternate; easing: easeInSine"
+      event-set__enter="_event: mouseenter; scale: .5 .5 .5" 
+      event-set__leave="_event: mouseleave; scale: .25 .25 .25"
+      event-set__leave1="_event: mouseleave; _target: #ttt; visible: false"
+      sound="src: assets/sound/sound9.mp3; on: mouseenter">
+    </a-entity>
 
-        <a-camera>
-            <a-cursor></a-cursor>
-        </a-camera>
-    </a-scene>
+    
+    <a-entity id="cylinder" obj-model="obj: #si-obj2; mtl: #si-mtl2" position="0 1 -5" scale=".25 .25 .25"
+      animation__rot="property: position; from:0 1 -5; to: 0 4 -5; loop: true; dur: 3000; dir: alternate; easing: easeInSine"
+      event-set__enter="_event: mouseenter; scale: .5 .5 .5" 
+      event-set__leave="_event: mouseleave; scale: .25 .25 .25"
+      event-set__leave1="_event: mouseleave; _target: #cylinder; visible: false"
+      sound="src: assets/sound/sound9.mp3; on: mouseenter">
+    </a-entity>
+
+    
+    <a-entity id="sss" obj-model="obj: #si-obj3; mtl: #si-mtl" position="4 1 -5" scale=".25 .25 .25"
+      animation__rot="property: position; from:4 4 -5; to: 4 1 -5; loop: true; dur: 3000; dir: alternate; easing: easeInSine"
+      event-set__enter="_event: mouseenter; scale: .5 .5 .5" 
+      event-set__leave="_event: mouseleave; scale: .25 .25 .25"
+      event-set__leave1="_event: mouseleave; _target: #sss; visible: false"
+      sound="src: assets/sound/sound9.mp3; on: mouseenter">
+    </a-entity>
+    
+    </a-entity>
+    <!-- <a-entity id="cameraRig" position="0 0.1 0">
+      <a-entity camera wasd-controls look-controls></a-entity>
+      <a-entity id="rightHand" mixin="teleport" laser-controls="hand: right" oculus-go-controls="hand: right">
+      </a-entity>
+    </a-entity> -->
+
+  </a-scene>
 </body>
 
 </html>
